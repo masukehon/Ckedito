@@ -1,0 +1,21 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.316.0",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "mongoose": "4.13.7",
+    "multer": "^1.3.1",
+    "nodemon": "^1.18.5"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test nodemon --exec mocha dist/test --recursive",
+    "dev": "nodemon dist/src/app.js",
+    "start": "node dist/src/app.js",
+    "testw": "set NODE_ENV=test&&nodemon --exec mocha dist/test --recursive"
+  }
+}
