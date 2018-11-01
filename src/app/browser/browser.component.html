@@ -13,9 +13,9 @@
 			<div id="show_upload_images">
 				<img id="blah" src="#" />
 			</div>
-			<form onsubmit="return Validate(this);" method="post" action="/upload" enctype='multipart/form-data'>
-				<input type="file" id="flFileUpload" name="flFileUpload"/>
-				<button id="btnUpload" class="button_template"><i class="fa fa-upload" aria-hidden="true"></i></button>
+			<form [formGroup]="formUploadImage" (ngSubmit)="submit()" enctype='multipart/form-data'>
+				<input type="file" id="flFileUpload" formControlName="flFileUpload" name="flFileUpload"/>
+				<button id="btnUpload" type="submit" class="button_template"><i class="fa fa-upload" aria-hidden="true"></i></button>
 			</form>
 		</div>
 
@@ -30,7 +30,10 @@
 
 		<ul class="folder-switcher" id="js-folder-switcher"></ul>
 
-		<div class="images-container" id="js-images-container">Loading..</div>
+		<!-- <div class="images-container" *ngIf="images" id="js-images-container">
+			<img style="width:100px;height:70px;" *ngFor="let img of images" src="{{img}}">
+		</div> -->
+		<div class="images-container" id="js-images-container"></div>
 
 		<div id="result"></div>
 
