@@ -15,7 +15,7 @@ CkEditorImageBrowser.init = function () {
 	if (baseHref) {
 		var h = (document.head || document.getElementsByTagName("head")[0]),
 			el = h.getElementsByTagName("link")[0];
-		el.href = location.href.replace(/\/[^\/]*$/,"/browser.css");
+		el.href = location.href.replace(/\/[^\/]*$/,"/../../assets/ckeditor/plugins/imagebrowser/browser/browser.css");
 		(h.getElementsByTagName("base")[0]).href = baseHref;
 	}
 

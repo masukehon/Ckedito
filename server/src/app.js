@@ -1,6 +1,7 @@
 const express = require("express");
 const { json } = require('body-parser');
-const multer = require('multer');
+const { ckeditorRouter } = require("./controllers/ckeditor.route");
+
 const cors = require("cors");
 
 const app = express();
@@ -10,17 +11,14 @@ app.use(express.static('./public'));
 app.use(cors());
 app.use(json());
 
+
+
 app.get('/', (req, res) => {
     res.send('hello');
 });
-app.post('/browser/img', (req, res) => {
-    res.send('browser');
-});
 
-app.post('/upload/img', multer().single('upload'), (req, res) => {
-    console.log(req.body);
-    res.send('upload');
-});
+app.use('/upload', ckeditorRouter);
+
 
 app.listen(4000, () => console.log('Server started !!'));
 
