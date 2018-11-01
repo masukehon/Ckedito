@@ -1,0 +1,10 @@
+<ckeditor [(ngModel)]="ckeditorContent" 
+    [config]="{
+     uiColor: 'FFFFFF',
+     filebrowserBrowseUrl: '/browser/img',
+     filebrowserUploadUrl: '/uploader/img'
+    }"
+    [readonly]="false" (change)="onChange($event)" (editorChange)="onEditorChange($event)" (ready)="onReady($event)"
+    (focus)="onFocus($event)" (blur)="onBlur($event)" (contentDom)="onContentDom($event)" (fileUploadRequest)="onFileUploadRequest($event)"
+    (fileUploadResponse)="onFileUploadResponse($event)" (paste)="onPaste($event)" (drop)="onDrop($event)" debounce="500">
+</ckeditor>

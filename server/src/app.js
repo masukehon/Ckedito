@@ -17,7 +17,7 @@ app.post('/browser/img', (req, res) => {
     res.send('browser');
 });
 
-app.post('/upload/img', multer().single('image'), (req, res) => {
+app.post('/upload/img', multer().single('upload'), (req, res) => {
     console.log(req.body);
     res.send('upload');
 });
