@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { UploadService } from '../services/upload.service';
+import { test1 } from '../../assets/javascript/demo';
 
 @Component({
   selector: 'app-browser',
@@ -17,11 +18,7 @@ export class BrowserComponent implements OnInit {
   constructor(private uploadService: UploadService) { }
 
   ngOnInit() {
-    this.uploadService.getAll()
-      .then(images => {
-        this.images = images.map(img => 'http://localhost:4000/' + img.image);
-      })
-      .catch(error => console.log(error));
+    test1();
   }
 
   submit() {

@@ -10,8 +10,8 @@ ckeditorRouter.get('/files', (req, res) => {
     const imgExtensions = ['.png', '.jpg', '.jpeg', '.svg'];
     const imageData = images
         .filter(item => imgExtensions.includes(path.extname(item)))
-        .map(item => ({ image: `/upload/${item}`, folder: '/' }));
-    res.send({ success: true, result: imageData});
+        .map(item => ({ image: `http://localhost:4000/upload/${item}`, folder: '/' }));
+    res.send(imageData);
 });
 
 ckeditorRouter.post('/', (req, res, next) => {

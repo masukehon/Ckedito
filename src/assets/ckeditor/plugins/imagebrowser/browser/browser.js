@@ -10,13 +10,14 @@ CkEditorImageBrowser.$imagesContainer = null;
 CkEditorImageBrowser.init = function () {
 	CkEditorImageBrowser.$folderSwitcher = $('#js-folder-switcher');
 	CkEditorImageBrowser.$imagesContainer = $('#js-images-container');
-
 	var baseHref = CkEditorImageBrowser.getQueryStringParam("baseHref");
+	
 	if (baseHref) {
 		var h = (document.head || document.getElementsByTagName("head")[0]),
 			el = h.getElementsByTagName("link")[0];
-		el.href = location.href.replace(/\/[^\/]*$/,"/../../assets/ckeditor/plugins/imagebrowser/browser/browser.css");
+		el.href = location.href.replace(/\/[^\/]*$/,"/browser.css");
 		(h.getElementsByTagName("base")[0]).href = baseHref;
+		
 	}
 
 	CkEditorImageBrowser.ckFunctionNum = CkEditorImageBrowser.getQueryStringParam('CKEditorFuncNum');
@@ -29,6 +30,7 @@ CkEditorImageBrowser.init = function () {
 };
 
 CkEditorImageBrowser.loadData = function (url, onLoaded) {
+	
 	CkEditorImageBrowser.folders = [];
 	CkEditorImageBrowser.images = {};
 
@@ -130,6 +132,7 @@ CkEditorImageBrowser.initEventHandlers = function () {
 };
 
 CkEditorImageBrowser.getQueryStringParam = function (name) {
+	
 	var regex = new RegExp('[?&]' + name + '=([^&]*)'),
 		result = window.location.search.match(regex);
 
