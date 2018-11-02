@@ -15,8 +15,7 @@ import { RequestService } from './services/request.service';
 import { UploadService } from './services/upload.service';
 
 const routesConfig: Routes = [
-  { path: '', component: CkeditorComponent },
-  { path: 'browser/img', component: BrowserComponent }
+  { path: '', component: CkeditorComponent }
 ];
 
 @NgModule({

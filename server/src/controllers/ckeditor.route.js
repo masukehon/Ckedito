@@ -17,8 +17,7 @@ ckeditorRouter.get('/files', (req, res) => {
 ckeditorRouter.post('/', (req, res, next) => {
     return new Promise((resolve, reject) => {
         upload.single('flFileUpload')(req, res, error => {
-            console.log(req.file);
-            res.send({ success: true, result: "ok"});
+            res.redirect('back');
         });
     });
 });

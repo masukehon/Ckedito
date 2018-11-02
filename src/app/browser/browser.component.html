@@ -13,9 +13,9 @@
 		<div id="show_upload_images">
 			<img id="blah" src="#" />
 		</div>
-		<form [formGroup]="formUploadImage" (ngSubmit)="submit()" enctype='multipart/form-data'>
-			<input type="file" id="flFileUpload" formControlName="flFileUpload" name="flFileUpload" />
-			<button id="btnUpload" type="submit" class="button_template"><i class="fa fa-upload" aria-hidden="true"></i></button>
+		<form [formGroup]="formUploadImage" (ngSubmit)="submit()">
+			<input type="file" (change)="onFileChanged($event)" />
+			<button type="submit" class="button_template"><i class="fa fa-upload" aria-hidden="true"></i></button>
 		</form>
 	</div>
 

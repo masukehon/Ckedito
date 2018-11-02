@@ -1,1 +1,1 @@
-export declare function test2();
+export declare function test2(cb);

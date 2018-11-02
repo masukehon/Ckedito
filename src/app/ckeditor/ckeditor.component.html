@@ -1,15 +1,14 @@
-<ckeditor 
-    name="editor1"
-    [(ngModel)]="ckeditorContent" 
+<!-- <ckeditor 
+    id="ckeditor"
+    name="ckeditor"
+    [(ngModel)]="ckeditor"
     [config]="{
-     uiColor: 'FFFFFF',
-     filebrowserBrowseUrl: '/browser/img',
-     filebrowserUploadUrl: '/uploader/img'
+     uiColor: 'FFFFFF'
     }"
+    (change)="OnChange($event)"
+    (editorChange)="onEditorChange($event)"
     >
-</ckeditor>
-
-<!-- <textarea id="editor"></textarea> -->
-
-
-
+</ckeditor> -->
+<textarea id="ckeditor" name="ckeditor"></textarea>
+<button (click)="submit()">Submit</button>
+{{ ckeditorTxt }}

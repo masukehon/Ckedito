@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UploadService } from '../services/upload.service';
 import { test1 } from '../../assets/javascript/demo';
 
@@ -11,20 +11,39 @@ import { test1 } from '../../assets/javascript/demo';
 export class BrowserComponent implements OnInit {
 
   formUploadImage = new FormGroup({
-    flFileUpload: new FormControl('')
+    file: new FormControl(null, Validators.required)
   });
-  images = [];
 
-  constructor(private uploadService: UploadService) { }
+
+  constructor(private uploadService: UploadService, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     test1();
   }
 
+  onFileChanged(event) {
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.formUploadImage.patchValue({
+          file: reader.result
+        });
+
+        // need to run CD since file load runs outside of zone
+        this.cd.markForCheck();
+      };
+    }
+  }
+
   submit() {
-    this.uploadService.create(this.formUploadImage.value)
-      .then(() => console.log('ok'))
-      .catch(error => console.log(error));
+    console.log('234234');
+    // this.uploadService.create(this.formUploadImage.value)
+    //   .then(() => console.log('ok'))
+    //   .catch(error => console.log(error));
   }
 
 }
