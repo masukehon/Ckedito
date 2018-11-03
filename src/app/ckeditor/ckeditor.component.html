@@ -10,5 +10,5 @@
     >
 </ckeditor> -->
 <textarea id="ckeditor" name="ckeditor"></textarea>
-<button (click)="submit()">Submit</button>
-{{ ckeditorTxt }}
+<button (click)="load()">Load</button>
+<p [innerHTML]="raw"></p>

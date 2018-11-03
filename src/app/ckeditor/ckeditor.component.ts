@@ -11,8 +11,15 @@ import { test3 } from '../../assets/javascript/demo3';
 
 export class CkeditorComponent implements OnInit, OnChanges {
   ckeditorTxt = '';
+  raw = '<p>abcd</p>';
   constructor(private ref: ChangeDetectorRef) { }
-  count = 0;
+  tempt = `<p>hello</p>
+  <p>
+    <img alt=""
+    src="http://localhost:4000/upload/1541148027912.jpg"
+    style="height:300px; width:400px" />
+  </p>
+  <p>goodbye</p>`;
 
   ngOnInit() {
     test2((result, error) => {
@@ -22,9 +29,10 @@ export class CkeditorComponent implements OnInit, OnChanges {
     });
   }
 
-  ngOnChanges() {}
+  ngOnChanges() { }
 
-  submit() {
-    
+  load() {
+    test3(this.tempt);
+    this.ref.detectChanges();
   }
 }

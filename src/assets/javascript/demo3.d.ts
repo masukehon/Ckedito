@@ -1,1 +1,1 @@
-export declare function test3();
+export declare function test3(data);
