@@ -18,13 +18,14 @@ ckeditorRouter.get('/files', (req, res) => {
 ckeditorRouter.post('/', (req, res, next) => {
     return new Promise((resolve, reject) => {
         upload.single('flFileUpload')(req, res, async error => {
+            const { quality } = req.body;
             if (error) return reject(error);
 
             if (req.file) {
                 const path = 'public/upload/' + req.file.filename;
                 const path_thumb = 'public/thumb/' + req.file.filename;
                 await Jimp.read(path)
-                    .then(image => image.quality(30).write(path_thumb))
+                    .then(image => image.quality(+quality).write(path_thumb))
                     .catch(error => reject(error.message));
             }
             return resolve(res.redirect('back'));

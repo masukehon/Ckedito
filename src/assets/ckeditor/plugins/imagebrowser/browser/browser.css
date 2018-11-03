@@ -116,3 +116,8 @@ body {
 .control_template{
 	display: none;
 }
+
+/* Kha custom */
+#quality {
+	width:50px;
+}
