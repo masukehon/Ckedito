@@ -13,6 +13,7 @@ import { CkeditorComponent } from './ckeditor/ckeditor.component';
 
 import { RequestService } from './services/request.service';
 import { UploadService } from './services/upload.service';
+import { CkeditorService } from './services/ckeditor.service';
 
 const routesConfig: Routes = [
   { path: '', component: CkeditorComponent }
@@ -32,7 +33,7 @@ const routesConfig: Routes = [
     FormsModule,
     RouterModule.forRoot(routesConfig)
   ],
-  providers: [RequestService, UploadService],
+  providers: [RequestService, UploadService, CkeditorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,3 +1,3 @@
-export function test3(data) {
+export function setValueCkeditor(data) {
     return CKEDITOR.instances['ckeditor'].setData(data);
 }

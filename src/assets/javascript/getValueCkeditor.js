@@ -1,4 +1,4 @@
-export function test2(cb) {
+export function getValueCkeditor(cb) {
     var editor = CKEDITOR.replace('ckeditor', {
         extraPlugins: 'imagebrowser',
         imageBrowser_listUrl: 'http://localhost:4000/upload/files'

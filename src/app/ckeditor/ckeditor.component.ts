@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnChanges, ChangeDetectorRef } from '@angular/core';
-import { test2 } from '../../assets/javascript/demo2';
-import { test3 } from '../../assets/javascript/demo3';
+import { CkeditorService } from '../services/ckeditor.service';
+
 
 @Component({
   selector: 'app-ckeditor',
@@ -12,7 +12,8 @@ import { test3 } from '../../assets/javascript/demo3';
 export class CkeditorComponent implements OnInit, OnChanges {
   ckeditorTxt = '';
   raw = '<p>abcd</p>';
-  constructor(private ref: ChangeDetectorRef) { }
+  constructor(private ckeditorService: CkeditorService,
+    private ref: ChangeDetectorRef) { }
   tempt = `<p>hello</p>
   <p>
     <img alt=""
@@ -22,7 +23,7 @@ export class CkeditorComponent implements OnInit, OnChanges {
   <p>goodbye</p>`;
 
   ngOnInit() {
-    test2((result, error) => {
+    this.ckeditorService.getValue((result, error) => {
       if (error) return console.log(error);
       this.ckeditorTxt = result;
       this.ref.detectChanges();
@@ -32,7 +33,7 @@ export class CkeditorComponent implements OnInit, OnChanges {
   ngOnChanges() { }
 
   load() {
-    test3(this.tempt);
+    this.ckeditorService.setValue(this.tempt);
     this.ref.detectChanges();
   }
 }

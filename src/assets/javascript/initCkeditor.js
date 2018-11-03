@@ -1,3 +1,3 @@
-export function test1() {
+export function initCkeditor() {
     CkEditorImageBrowser.init();
 }
