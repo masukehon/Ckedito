@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { UploadService } from '../services/upload.service';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CkeditorService } from '../services/ckeditor.service';
 
 @Component({
   selector: 'app-browser',
@@ -10,24 +10,16 @@ import { UploadService } from '../services/upload.service';
 export class BrowserComponent implements OnInit {
 
   formUploadImage = new FormGroup({
-    flFileUpload: new FormControl('')
+    file: new FormControl(null, Validators.required)
   });
-  images = [];
 
-  constructor(private uploadService: UploadService) { }
+
+  constructor(
+    private ckeditorService: CkeditorService,
+    private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.uploadService.getAll()
-      .then(images => {
-        this.images = images.map(img => 'http://localhost:4000/' + img.image);
-      })
-      .catch(error => console.log(error));
-  }
-
-  submit() {
-    this.uploadService.create(this.formUploadImage.value)
-      .then(() => console.log('ok'))
-      .catch(error => console.log(error));
+    this.ckeditorService.init();
   }
 
 }

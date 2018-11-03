@@ -1,10 +1,14 @@
-<ckeditor [(ngModel)]="ckeditorContent" 
+<!-- <ckeditor 
+    id="ckeditor"
+    name="ckeditor"
+    [(ngModel)]="ckeditor"
     [config]="{
-     uiColor: 'FFFFFF',
-     filebrowserBrowseUrl: '/browser/img',
-     filebrowserUploadUrl: '/uploader/img'
+     uiColor: 'FFFFFF'
     }"
-    [readonly]="false" (change)="onChange($event)" (editorChange)="onEditorChange($event)" (ready)="onReady($event)"
-    (focus)="onFocus($event)" (blur)="onBlur($event)" (contentDom)="onContentDom($event)" (fileUploadRequest)="onFileUploadRequest($event)"
-    (fileUploadResponse)="onFileUploadResponse($event)" (paste)="onPaste($event)" (drop)="onDrop($event)" debounce="500">
-</ckeditor>
+    (change)="OnChange($event)"
+    (editorChange)="onEditorChange($event)"
+    >
+</ckeditor> -->
+<textarea id="ckeditor" name="ckeditor"></textarea>
+<button (click)="load()">Load</button>
+<p [innerHTML]="raw"></p>

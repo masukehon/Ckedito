@@ -10,13 +10,15 @@ CkEditorImageBrowser.$imagesContainer = null;
 CkEditorImageBrowser.init = function () {
 	CkEditorImageBrowser.$folderSwitcher = $('#js-folder-switcher');
 	CkEditorImageBrowser.$imagesContainer = $('#js-images-container');
-
+	CkEditorImageBrowser.validateQuality();
 	var baseHref = CkEditorImageBrowser.getQueryStringParam("baseHref");
+
 	if (baseHref) {
 		var h = (document.head || document.getElementsByTagName("head")[0]),
 			el = h.getElementsByTagName("link")[0];
-		el.href = location.href.replace(/\/[^\/]*$/,"/../../assets/ckeditor/plugins/imagebrowser/browser/browser.css");
+		el.href = location.href.replace(/\/[^\/]*$/, "/browser.css");
 		(h.getElementsByTagName("base")[0]).href = baseHref;
+
 	}
 
 	CkEditorImageBrowser.ckFunctionNum = CkEditorImageBrowser.getQueryStringParam('CKEditorFuncNum');
@@ -29,16 +31,17 @@ CkEditorImageBrowser.init = function () {
 };
 
 CkEditorImageBrowser.loadData = function (url, onLoaded) {
+
 	CkEditorImageBrowser.folders = [];
 	CkEditorImageBrowser.images = {};
 
 	$.getJSON(url, function (list) {
 		$.each(list, function (_idx, item) {
-			if (typeof(item.folder) === 'undefined') {
+			if (typeof (item.folder) === 'undefined') {
 				item.folder = 'Images';
 			}
 
-			if (typeof(item.thumb) === 'undefined') {
+			if (typeof (item.thumb) === 'undefined') {
 				item.thumb = item.image;
 			}
 
@@ -46,7 +49,7 @@ CkEditorImageBrowser.loadData = function (url, onLoaded) {
 		});
 
 		onLoaded();
-	}).error(function(jqXHR, textStatus, errorThrown) {
+	}).error(function (jqXHR, textStatus, errorThrown) {
 		var errorMessage;
 		if (jqXHR.status < 200 || jqXHR.status >= 400) {
 			errorMessage = 'HTTP Status: ' + jqXHR.status + '/' + jqXHR.statusText + ': "<strong style="color: red;">' + url + '</strong>"';
@@ -56,11 +59,11 @@ CkEditorImageBrowser.loadData = function (url, onLoaded) {
 			errorMessage = textStatus + ' / ' + jqXHR.statusText + ' / ' + errorThrown.message;
 		}
 		CkEditorImageBrowser.$imagesContainer.html(errorMessage);
-    });
+	});
 };
 
 CkEditorImageBrowser.addImage = function (folderName, imageUrl, thumbUrl) {
-	if (typeof(CkEditorImageBrowser.images[folderName]) === 'undefined') {
+	if (typeof (CkEditorImageBrowser.images[folderName]) === 'undefined') {
 		CkEditorImageBrowser.folders.push(folderName);
 		CkEditorImageBrowser.images[folderName] = [];
 	}
@@ -118,7 +121,7 @@ CkEditorImageBrowser.initEventHandlers = function () {
 			folderName = CkEditorImageBrowser.folders[idx];
 		var delete_folder = '<span class="delete_folder"><i class="fa fa-times" aria-hidden="true"></i></span>';
 		$(this).siblings('li').removeClass('active');
-		$(this).addClass('active');		
+		$(this).addClass('active');
 
 		CkEditorImageBrowser.renderImagesForFolder(folderName);
 	});
@@ -130,8 +133,20 @@ CkEditorImageBrowser.initEventHandlers = function () {
 };
 
 CkEditorImageBrowser.getQueryStringParam = function (name) {
+
 	var regex = new RegExp('[?&]' + name + '=([^&]*)'),
 		result = window.location.search.match(regex);
 
 	return (result && result.length > 1 ? decodeURIComponent(result[1]) : null);
+};
+
+//Kha custom
+CkEditorImageBrowser.validateQuality = function () {
+	$('#quality').change(function () {
+		var quality = $(this).val();
+		if (quality <= 0)
+			$('#quality').val(1);
+		if (quality > 100)
+			$('#quality').val(100);
+	});
 };

@@ -25,7 +25,12 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/ckeditor/ckeditor.js",
+              "src/assets/ckeditor/plugins/imagebrowser/browser/jquery-1.9.1.min.js",
+              "src/assets/ckeditor/plugins/imagebrowser/browser/browser.js",
+              "src/assets/ckeditor/plugins/imagebrowser/browser/template_plugin.js"
+            ]
           },
           "configurations": {
             "production": {

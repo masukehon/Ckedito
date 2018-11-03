@@ -1,25 +1,25 @@
 <!doctype html>
 <html lang="vi">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<base>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="../../assets/ckeditor/plugins/imagebrowser/browser/browser.css">
-		<script type="text/javascript" src="../../assets/ckeditor/plugins/imagebrowser/browser/jquery-1.9.1.min.js"></script>
-	</head>
 
-	<body>
-		<div class="container_upload" ng-controller="upload_token">
-			<div id="show_upload_images">
-				<img id="blah" src="#" />
-			</div>
-			<form [formGroup]="formUploadImage" (ngSubmit)="submit()" enctype='multipart/form-data'>
-				<input type="file" id="flFileUpload" formControlName="flFileUpload" name="flFileUpload"/>
-				<button id="btnUpload" type="submit" class="button_template"><i class="fa fa-upload" aria-hidden="true"></i></button>
-			</form>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<base>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../../assets/ckeditor/plugins/imagebrowser/browser/browser.css">
+</head>
+
+<body>
+	<div class="container_upload" ng-controller="upload_token">
+		<div id="show_upload_images">
+			<img id="blah" src="#" />
 		</div>
+		<form [formGroup]="formUploadImage" (ngSubmit)="submit()">
+			<input type="file" (change)="onFileChanged($event)" />
+			<button type="submit" class="button_template"><i class="fa fa-upload" aria-hidden="true"></i></button>
+		</form>
+	</div>
 
-		<script type="text/x-template-html" id="js-template-image">
+	<script type="text/x-template-html" id="js-template-image">
 			<div class="show_image_list">
 				<span data-image="%thumbImage%"><i class="fa fa-times" aria-hidden="true"></i></span>
 				<a href="javascript://" class="thumbnail js-image-link" data-url="%imageUrl%">
@@ -28,19 +28,16 @@
 			</div>
 		</script>
 
-		<ul class="folder-switcher" id="js-folder-switcher"></ul>
+	<ul class="folder-switcher" id="js-folder-switcher"></ul>
 
-		<!-- <div class="images-container" *ngIf="images" id="js-images-container">
+	<!-- <div class="images-container" *ngIf="images" id="js-images-container">
 			<img style="width:100px;height:70px;" *ngFor="let img of images" src="{{img}}">
 		</div> -->
-		<div class="images-container" id="js-images-container"></div>
+	<div class="images-container" id="js-images-container">Loading...</div>
 
-		<div id="result"></div>
+	<div id="result"></div>
 
-		<script type="text/javascript" src="../../assets/ckeditor/plugins/imagebrowser/browser/browser.js"></script>
-		<script type="text/javascript">
-			CkEditorImageBrowser.init();
-		</script>
-		<script type="text/javascript" src="../../assets/ckeditor/plugins/imagebrowser/browser/template_plugin.js"></script>
-	</body>
+	
+</body>
+
 </html>
