@@ -3,6 +3,20 @@ const fs = require('fs');
 const path = require('path');
 const { upload } = require('../utils/multer');
 const Jimp = require('jimp');
+const AWS = require('aws-sdk');
+
+const ACCESSS_KEY_ID = 'AKIAJX2WRI7SQFHWNAXQ';
+const SECRET_ACCESS_KEY = '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';
+const BUCKET_NAME = 'purtier';
+
+// AWS.config.loadFromPath('./AwsConfig.json');
+AWS.config.update({
+    accessKeyId: ACCESSS_KEY_ID,
+    secretAccessKey: SECRET_ACCESS_KEY,
+    subregion: 'us-east-1'
+});
+
+var s3 = new AWS.S3();
 
 const ckeditorRouter = Router();
 
@@ -13,6 +27,20 @@ ckeditorRouter.get('/files', (req, res) => {
         .filter(item => imgExtensions.includes(path.extname(item)))
         .map(item => ({ image: `http://localhost:4000/upload/${item}`, folder: '/' }));
     res.send(imageData);
+});
+
+ckeditorRouter.get('/image-on-aws', (req, res) => {
+    var bucketParams = {
+        Bucket : BUCKET_NAME
+     };
+     
+    s3.listObjects(bucketParams).promise()
+    .then(items => {
+        const path = 'https://s3-ap-southeast-1.amazonaws.com/purtier/';
+        const imageData = items.Contents.map(imageInfo => ({ image: path + imageInfo.Key, folder: '/' }));
+        res.send(imageData);
+    })
+    .catch(error => console.log(error));
 });
 
 ckeditorRouter.post('/', (req, res, next) => {

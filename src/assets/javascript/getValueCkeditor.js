@@ -1,7 +1,7 @@
 export function getValueCkeditor(cb) {
     var editor = CKEDITOR.replace('ckeditor', {
         extraPlugins: 'imagebrowser',
-        imageBrowser_listUrl: 'http://localhost:4000/upload/files'
+        imageBrowser_listUrl: 'http://localhost:4000/upload/image-on-aws'
     })
 
     editor.on('change', evt => {
