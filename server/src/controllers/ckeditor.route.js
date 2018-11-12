@@ -59,17 +59,14 @@ ckeditorRouter.post('/aws', (req, res, next) => {
                 const path = 'public/upload/' + req.file.filename;
 
                 await Jimp.read(path)
-                    .then(image => ({ image, ext: image.getExtension() }))
-                    .then(obj => {
+                    .then(async image => {
+                        const extension = image.getExtension();
                         let mine = "image/jpeg";
-                        if (obj.ext.includes("bmp")) mine = "image/bmp";
-                        if (obj.ext.includes("png")) mine = "image/png";
+                        if (extension.includes("bmp")) mine = "image/bmp";
+                        if (extension.includes("png")) mine = "image/png";
+                        const buffer = await image.quality(+quality).getBufferAsync(mine);
 
-                        return { buffer: obj.image.quality(+quality).getBufferAsync(mine), ext: obj.ext };
-                    })
-                    .then(async obj => {
-                        buffer = await obj.buffer;
-                        uploadAWS(buffer, obj.ext);
+                        return uploadAWS(buffer, extension);
                     })
                     .catch(error => reject(error.message));
             }
