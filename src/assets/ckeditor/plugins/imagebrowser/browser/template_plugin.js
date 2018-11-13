@@ -9,16 +9,16 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-$("#flFileUpload").change(function(){
+$("#flFileUpload").change(function () {
     readURL(this);
 });
 // check images demo
-var _validFileExtensions = [".jpg", ".jpeg",".gif", ".png", ".svg"];
+var _validFileExtensions = [".jpg", ".jpeg", ".gif", ".png", ".svg"];
 function Validate(oForm) {
     var arrInputs = oForm.getElementsByTagName("input");
-    if(arrInputs === ''){
-      alert('File upload: *jpg *jpeg *gif *png *svg');
-      return false;
+    if (arrInputs === '') {
+        alert('File upload: *jpg *jpeg *gif *png *svg');
+        return false;
     }
     for (var i = 0; i < arrInputs.length; i++) {
         var oInput = arrInputs[i];
@@ -46,20 +46,21 @@ function Validate(oForm) {
 
 //delete file
 $(document).on('click', '.show_image_list span', function () {
-  var url_del = $(this).attr('data-image')
-  if(url_del.split('/').pop() !== 'no-image.png'){
-      $.ajax({
-        url: '/delete_file',
-        type: 'POST',
-        dataType: 'text',
-        data: {
-            url_del: url_del          
-        },
-        success: function(result){
-          location.reload();
-        }
-      });
-  }else{
-      alert('Cannot delete "no-image.png" ')
-  }
+    var url_del = $(this).attr('data-image')
+    if (url_del.split('/').pop() !== 'no-image.png') {
+        $.ajax({
+            url: 'http://localhost:4000/upload/delete-file',
+            type: 'POST',
+            contentType: "application/json",
+            dataType: 'json',
+            data: JSON.stringify({
+                url_del: url_del
+            }),
+            success: function (result) {
+                location.reload();
+            }
+        });
+    } else {
+        alert('Cannot delete "no-image.png" ')
+    }
 });

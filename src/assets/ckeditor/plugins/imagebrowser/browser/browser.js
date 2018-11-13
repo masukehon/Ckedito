@@ -18,7 +18,6 @@ CkEditorImageBrowser.init = function () {
 			el = h.getElementsByTagName("link")[0];
 		el.href = location.href.replace(/\/[^\/]*$/, "/browser.css");
 		(h.getElementsByTagName("base")[0]).href = baseHref;
-
 	}
 
 	CkEditorImageBrowser.ckFunctionNum = CkEditorImageBrowser.getQueryStringParam('CKEditorFuncNum');

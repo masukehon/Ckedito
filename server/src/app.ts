@@ -1,8 +1,8 @@
-const express = require("express");
-const { json } = require('body-parser');
-const { ckeditorRouter } = require("./controllers/ckeditor.route");
+const express = require('express');
+const cors = require('cors');
+import { json } from 'body-parser';
+import { ckeditorRouter } from './controllers/ckeditor.route';
 
-const cors = require("cors");
 
 const app = express();
 app.set('view engine', 'ejs');
