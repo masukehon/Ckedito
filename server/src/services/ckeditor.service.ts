@@ -12,7 +12,9 @@ export class CkeditorService {
         return s3.listObjects(bucketParams).promise()
             .then(items => {
                 const pathUrl = 'https://s3-ap-southeast-1.amazonaws.com/purtier/';
-                const imageData = items.Contents.map(imageInfo => ({ image: pathUrl + imageInfo.Key, folder: '/' }));
+                const imageData = items.Contents
+                .sort((a, b) => b.LastModified.getTime() - a.LastModified.getTime())
+                .map(imageInfo => ({ image: pathUrl + imageInfo.Key, folder: '/' }));
                 return imageData;
             });
     }
