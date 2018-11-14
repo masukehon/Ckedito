@@ -1,14 +1,6 @@
 const multer = require('multer');
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'public/upload');
-    },
-    filename: (req, file, cb) => {
-        const fileExtension = file.originalname.substring(file.originalname.lastIndexOf('.') + 1);
-        cb(null, `${Date.now()}.${fileExtension}`);
-    }
-});
+const storage = multer.memoryStorage();
 
 function fileFilter(req, file, cb) {
     if (file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png')

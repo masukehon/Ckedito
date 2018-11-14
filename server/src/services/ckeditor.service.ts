@@ -13,8 +13,8 @@ export class CkeditorService {
             .then(items => {
                 const pathUrl = 'https://s3-ap-southeast-1.amazonaws.com/purtier/';
                 const imageData = items.Contents
-                .sort((a, b) => b.LastModified.getTime() - a.LastModified.getTime())
-                .map(imageInfo => ({ image: pathUrl + imageInfo.Key, folder: '/' }));
+                    .sort((a, b) => b.LastModified.getTime() - a.LastModified.getTime())
+                    .map(imageInfo => ({ image: pathUrl + imageInfo.Key, folder: '/' }));
                 return imageData;
             });
     }
@@ -22,13 +22,17 @@ export class CkeditorService {
     public static async uploadImageToAWS(req, res) {
         return new Promise((resolve, reject) => {
             upload.single('flFileUpload')(req, res, async error => {
+
+                if (error)
+                    return reject(error);
+
+                const fileExtension = req.file.originalname.substring(req.file.originalname.lastIndexOf('.') + 1);
+                req.file.originalname = `${Date.now()}.${fileExtension}`;
                 const { quality } = req.body;
-                if (error) return reject(error);
 
                 if (req.file) {
-                    const pathUrl = 'public/upload/' + req.file.filename;
 
-                    await Jimp.read(pathUrl)
+                    await Jimp.read(req.file.buffer)
                         .then(async image => {
                             const extension = image.getExtension();
                             let mine = 'image/jpeg';
