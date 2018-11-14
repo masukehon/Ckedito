@@ -1,11 +1,8 @@
 export function getValueCkeditor(cb) {
-    var editor = CKEDITOR.replace('ckeditor', {
-        extraPlugins: 'imagebrowser',
-        imageBrowser_listUrl: 'http://localhost:4000/upload/image-on-aws'
-    })
-
-    editor.on('change', evt => {
+    function changeEvent(evt) {
         if (evt.editor) return cb(evt.editor.getData());
         return cb(null, "Loi roi!");
-    });
+    }
+
+    CKEDITOR.instances['ckeditor'].on('change', changeEvent);
 }

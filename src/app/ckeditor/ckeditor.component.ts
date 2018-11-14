@@ -23,6 +23,7 @@ export class CkeditorComponent implements OnInit, OnChanges {
   <p>goodbye</p>`;
 
   ngOnInit() {
+    this.ckeditorService.init();
     this.ckeditorService.getValue((result, error) => {
       if (error) return console.log(error);
       this.ckeditorTxt = result;
